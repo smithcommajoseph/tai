@@ -1,15 +1,3 @@
-GIT
-  remote: git://github.com/jnunemaker/twitter.git
-  revision: 69909ac6185f137bcb67bb5c07c1074360db434e
-  specs:
-    twitter (1.6.0)
-      faraday (~> 0.7.4)
-      faraday_middleware (~> 0.7.0.rc1)
-      hashie (~> 1.0.0)
-      multi_json (~> 1.0.0)
-      multi_xml (~> 0.2.0)
-      simple_oauth (~> 0.1.5)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -45,12 +33,12 @@ GEM
     builder (2.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    faraday (0.7.4)
-      addressable (~> 2.2.6)
+    faraday (0.6.1)
+      addressable (~> 2.2.4)
       multipart-post (~> 1.1.0)
-      rack (< 2, >= 1.1.0)
-    faraday_middleware (0.7.0.rc1)
-      faraday (~> 0.7.3)
+      rack (>= 1.1.0, < 2)
+    faraday_middleware (0.6.5)
+      faraday (~> 0.6.0)
     hashie (1.0.0)
     i18n (0.5.0)
     mail (2.2.19)
@@ -89,6 +77,13 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    twitter (1.6.0)
+      faraday (~> 0.6.1)
+      faraday_middleware (~> 0.6.3)
+      hashie (~> 1.0.0)
+      multi_json (~> 1.0.0)
+      multi_xml (~> 0.2.0)
+      simple_oauth (~> 0.1.5)
     tzinfo (0.3.29)
 
 PLATFORMS
@@ -98,4 +93,4 @@ DEPENDENCIES
   oauth
   rails (= 3.0.7)
   sqlite3
-  twitter!
+  twitter
