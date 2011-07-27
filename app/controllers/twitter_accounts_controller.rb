@@ -13,9 +13,9 @@ class TwitterAccountsController < ApplicationController
       twitter_account.validate_oauth_token(params[:oauth_verifier], twitter_callback_url)
       twitter_account.save
       if twitter_account.active?
-        :notice => 'Twitter account activated!'
+        flash[:notice] = 'Twitter account activated!'
       else
-        :notice => "Unable to activate twitter account."
+        flash[:notice] = "Unable to activate twitter account."
       end
     end
   end
