@@ -7,7 +7,7 @@ gem 'rails', '3.0.7'
 
 gem 'sqlite3'
 gem 'oauth'
-gem 'twitter', :git => 'git://github.com/jnunemaker/twitter.git'
+gem 'twitter'
 
 # Use unicorn as the web server
 # gem 'unicorn'
