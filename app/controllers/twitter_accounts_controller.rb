@@ -14,7 +14,7 @@ class TwitterAccountsController < ApplicationController
       twitter_account.save
       if twitter_account.active?
         flash[:notice] = 'Twitter account activated!'
-        redirect_to(twitter_account.post('@Dean Boyer, quick cocking things up.'));
+        # redirect_to(twitter_account.post('@deanboyer, would ya look at it?'));
       else
         flash[:notice] = "Unable to activate twitter account."
       end
