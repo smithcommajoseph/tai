@@ -5,6 +5,7 @@ class SlightController < ApplicationController
   end
   
   def whom
+    twitter_account.post('@deanboyer, would ya look at it?');
     
   end
   
