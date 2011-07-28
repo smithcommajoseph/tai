@@ -4,4 +4,8 @@ class MainController < ApplicationController
     
   end
   
+  def start
+    
+  end
+  
 end

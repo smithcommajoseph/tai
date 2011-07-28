@@ -1,0 +1,2 @@
+module SlightHelper
+end
