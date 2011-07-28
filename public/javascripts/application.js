@@ -9,15 +9,34 @@ var Tai = Tai || {};
 			$wn,
 			$wrap,
 			$doIt,
-			$anchorScrolls,
-			$infoScrolls;
+			$launcherScrolls,
+			$infoScrolls,
+			$launcher,
+			$m,
+			$modal;
 		
 		pub.init = function(){
 			$wn = $(window);
 			$wrap = $('#wrap');
 			$doIt = $('#do-it');
-			$anchorScrolls = $('a[href=#do-it]');
+			$launcherScrolls = $('a[href=#do-it]');
 			$infoScrolls = $('a[href=#infos]');
+			$launcher = $('#launcher');
+			$modal = $('<div/>').attr('id', 'modal-wrap').appendTo('body');
+			
+			$m = $modal.modal({
+				onOpened: function(){
+					$.ajax({
+						url: 'http://tweetaninsult.com/twitter_account/new',
+						success: function(data){
+							$modal.append(data);
+						}
+					});
+				},
+				onClosed: function(){
+					$modal.empty();
+				}
+			});
 			
 			_positionTop();
 			
@@ -29,7 +48,7 @@ var Tai = Tai || {};
 				_positionTop();
 			});
 			
-			$anchorScrolls.bind('click.tai', function(e){
+			$launcherScrolls.bind('click.tai', function(e){
 				e.preventDefault();
 				$.scrollTo(0, 800);
 			});
@@ -39,11 +58,16 @@ var Tai = Tai || {};
 				$.scrollTo($('#infos').position().top, 800);
 			});
 			
+			$launcher.bind('click.tai', function(e){
+				e.preventDefault();
+				
+				$m.modal('open');
+			});
 			
 		}
 		
 		function _positionTop(){
-			var top = ((($wn.height() + $doIt.outerHeight() ) / 4) - 40) + 'px';
+			var top = ((($wn.height() + $doIt.outerHeight() ) / 4) - 50) + 'px';
 			
 			$wrap.css({'top': top});
 			$doIt.css({'margin-bottom': top});
