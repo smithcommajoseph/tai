@@ -13,7 +13,7 @@ class TwitterAccountsController < ApplicationController
       twitter_account.validate_oauth_token(params[:oauth_verifier], twitter_callback_url)
       twitter_account.save
       if twitter_account.active?
-        redirect_to(slight_generator_url, :notice => 'Twitter account activated!')
+        render(slight_generator_url, :notice => 'Twitter account activated!')
         
         # flash[:notice] = 'Twitter account activated!'
         # twitter_account.post('@deanboyer, would ya look at it?');
