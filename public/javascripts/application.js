@@ -11,9 +11,7 @@ var Tai = Tai || {};
 			$doIt,
 			$launcherScrolls,
 			$infoScrolls,
-			$launcher,
-			$m,
-			$modal;
+			$launcher;
 		
 		pub.init = function(){
 			$wn = $(window);
@@ -22,19 +20,7 @@ var Tai = Tai || {};
 			$launcherScrolls = $('a[href=#do-it]');
 			$infoScrolls = $('a[href=#infos]');
 			$launcher = $('#launcher');
-			$modal = $('<div/>').attr('id', 'modal-wrap').appendTo('body');
-			
-			$m = $modal.modal({
-				onOpened: function(){
-					var $contents = $('<iframe src="http://tweetaninsult.com/twitter_account/new" />');
-					
-					$modal.append($contents);
-				},
-				onClosed: function(){
-					$modal.empty();
-				}
-			});
-			
+						
 			_positionTop();
 			
 			_binds();
@@ -53,12 +39,6 @@ var Tai = Tai || {};
 			$infoScrolls.bind('click.tai', function(e){
 				e.preventDefault();
 				$.scrollTo($('#infos').position().top, 800);
-			});
-			
-			$launcher.bind('click.tai', function(e){
-				e.preventDefault();
-				
-				$m.modal('open');
 			});
 			
 		}
