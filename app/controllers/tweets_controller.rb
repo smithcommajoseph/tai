@@ -15,7 +15,7 @@ class TweetsController < ApplicationController
       tweet.save()
       
       twitter_account = TwitterAccount.find_by_oauth_token(t)
-      twitter_account.post("#{tweet.to} #{tweet.insult}");
+      twitter_account.post("#{tweet.to} #{tweet.insult}")
     end
   end
   
