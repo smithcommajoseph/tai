@@ -26,12 +26,9 @@ var Tai = Tai || {};
 			
 			$m = $modal.modal({
 				onOpened: function(){
-					$.ajax({
-						url: 'http://tweetaninsult.com/twitter_account/new',
-						success: function(data){
-							$modal.append(data);
-						}
-					});
+					var $contents = $('<iframe src="http://tweetaninsult.com/twitter_account/new" />');
+					
+					$modal.append($contents);
 				},
 				onClosed: function(){
 					$modal.empty();
