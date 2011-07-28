@@ -14,9 +14,8 @@ class SlightController < ApplicationController
     twitter_account = TwitterAccount.find_by_oauth_token(@t)
   end
   
-  def tweet
-    # twitter_account = TwitterAccount.find_by_oauth_token(params[:oauth_token])
-    # twitter_account.post('@deanboyer, would ya look at it?');
+  def success
+    
   end
   
 end
