@@ -1,7 +1,7 @@
 class SlightController < ApplicationController
   
   def generator
-    @t = flash[:t]
+    @t = :flash[:t]
   end
   
   def whom
