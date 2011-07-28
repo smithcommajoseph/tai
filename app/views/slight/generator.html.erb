@@ -1,4 +1,8 @@
 <p id="notice"><%= notice %></p>
 <p>Word, let's generate some crap</p>
-<%= link_to "We Postin stuff", slight_whom_path %>
-<%= @t %>
+<%= form_for @tweet do |f| %>
+    <%= f.hidden_field :t %>
+    <%= f.text_field :to %>
+    <%= f.text_field :insult %>
+    <%= f.submit %> 
+<% end %>

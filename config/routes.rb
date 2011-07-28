@@ -1,7 +1,7 @@
 Tai::Application.routes.draw do
   
   resource :twitter_account
-  
+  resource :tweet
   match '/callback/twitter/' => "twitter_accounts#callback", :as => :twitter_callback
   
   match '/slight/generator' => 'slight#generator', :as => :slight_generator
