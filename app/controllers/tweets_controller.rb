@@ -1,24 +1,27 @@
 class TweetsController < ApplicationController
   
-  def update
-    t = params[:tweet][:t]
-    to = params[:tweet][:to]
-    insult = params[:tweet][:insult]
+  def new
+    noun = InsultNoun.first(:offset => rand(InsultNoun.count)).noun
+    adjective = InsultAdjective.first(:offset => rand(InsultAdjective.count)).adjective
+    insult = "#{adjective} #{noun}"
+    t = flash[:t]
     
-    if t.empty? || to.empty? || insult.empty?
-      redirect_to(slight_generator_url, :notice => 'Need to fill out all the fields, ya douche!')
-    else
-      tweet = Tweet.create()
-      tweet.t = t
-      tweet.insult = insult
-      tweet.to = to
-      tweet.save()
-      
+    @tweet = Tweet.new({:t => t, :insult => insult})
+  end
+  
+  def create
+    @tweet = Tweet.create(params[:tweet])
+    if @tweet.valid?
       twitter_account = TwitterAccount.find_by_oauth_token(t)
       twitter_account.post("#{tweet.to} is a #{tweet.insult} #tweetaninsult")
-      
-      redirect_to(slight_success_url, :notice => "Sweet! You successfully (and publicly) bashed that no good #{tweet.to} proper!")
+      redirect_to(slight_success_url, :notice => "Sweet! You successfully (and publicly) bashed that no good #{tweet.to} proper!")      
+    else
+      render(slight_generator_url, :notice => 'Need to fill out all the fields, ya douche!')
     end
+  end
+  
+  def show
+    @tweet = Tweet.find(params[:id])
   end
   
 end
