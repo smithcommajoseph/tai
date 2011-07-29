@@ -14,9 +14,9 @@ class TweetsController < ApplicationController
     if @tweet.valid?
       twitter_account = TwitterAccount.find_by_oauth_token(@tweet.t)
       twitter_account.post("#{@tweet.to} is a #{@tweet.insult} #tweetaninsult")
-      redirect_to :action => 'show', :id => @tweet.id, :notice => "Sweet! You successfully (and publicly) bashed that no good #{@tweet.to} proper!")     
+      render :action => 'show', :id => @tweet.id, :notice => "Sweet! You successfully (and publicly) bashed that no good #{@tweet.to} proper!"
     else
-      render(slight_generator_url, :notice => 'Need to fill out all the fields, ya douche!')
+      render :action => 'new', :notice => 'Need to fill out all the fields, ya douche!'
     end
   end
   
