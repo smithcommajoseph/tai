@@ -22,6 +22,7 @@ class TweetsController < ApplicationController
   
   def show
     @tweet = Tweet.find(params[:id])
+    @sent = "#{@tweet.to} is a #{@tweet.insult} #tweetaninsult"
   end
   
 end
