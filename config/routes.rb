@@ -1,7 +1,8 @@
 Tai::Application.routes.draw do
   
-  resource :twitter_account, :only => [:new] 
-  match '/callback/twitter/' => "twitter_accounts#callback", :as => :twitter_callback
+  resource :account, :only => [:new] 
+  match '/callback/twitter/' => "accounts#twitter_callback", :as => :twitter_callback
+  match '/callback/facebook/' => "accounts#facebook_callback", :as => :facebook_callback
   
   resources :tweets, :only => [:new, :create, :show] 
   
