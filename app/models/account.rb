@@ -1,4 +1,4 @@
-class TwitterAccount < ActiveRecord::Base
+class Account < ActiveRecord::Base
   
   CONSUMER_KEY = APP_CONFIG[:twitter][:consumer_key]
   CONSUMER_SECRET = APP_CONFIG[:twitter][:consumer_secret]
@@ -7,7 +7,7 @@ class TwitterAccount < ActiveRecord::Base
   def authorize_url(callback_url = '')
     if self.oauth_authorize_url.blank?
       # Step one, generate a request URL with a request token and secret
-      signing_consumer = OAuth::Consumer.new(TwitterAccount::CONSUMER_KEY, TwitterAccount::CONSUMER_SECRET, TwitterAccount::OPTIONS)
+      signing_consumer = OAuth::Consumer.new(Account::CONSUMER_KEY, Account::CONSUMER_SECRET, Account::OPTIONS)
       request_token = signing_consumer.get_request_token(:oauth_callback => callback_url)
       self.oauth_token = request_token.token
       self.oauth_token_secret = request_token.secret
@@ -19,7 +19,7 @@ class TwitterAccount < ActiveRecord::Base
   
   def validate_oauth_token(oauth_verifier, callback_url = '')
     begin
-      signing_consumer = OAuth::Consumer.new(TwitterAccount::CONSUMER_KEY, TwitterAccount::CONSUMER_SECRET, TwitterAccount::OPTIONS)
+      signing_consumer = OAuth::Consumer.new(Account::CONSUMER_KEY, Account::CONSUMER_SECRET, Account::OPTIONS)
       access_token = OAuth::RequestToken.new(signing_consumer, self.oauth_token, self.oauth_token_secret).
                                          get_access_token(:oauth_verifier => oauth_verifier)
       self.oauth_token = access_token.params[:oauth_token]
@@ -35,8 +35,8 @@ class TwitterAccount < ActiveRecord::Base
   
   def post(message)
     Twitter.configure do |config|
-      config.consumer_key = TwitterAccount::CONSUMER_KEY
-      config.consumer_secret = TwitterAccount::CONSUMER_SECRET
+      config.consumer_key = Account::CONSUMER_KEY
+      config.consumer_secret = Account::CONSUMER_SECRET
       config.oauth_token = self.oauth_token
       config.oauth_token_secret = self.oauth_token_secret
     end

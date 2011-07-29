@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110728205710) do
+ActiveRecord::Schema.define(:version => 20110729223858) do
 
   create_table "insult_adjectives", :force => true do |t|
     t.string   "adjective"
@@ -24,15 +24,7 @@ ActiveRecord::Schema.define(:version => 20110728205710) do
     t.datetime "updated_at"
   end
 
-  create_table "tweets", :force => true do |t|
-    t.string   "to"
-    t.string   "insult"
-    t.string   "t"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "twitter_accounts", :force => true do |t|
+  create_table "oauth_accounts", :force => true do |t|
     t.integer  "user_id"
     t.boolean  "active",               :default => false
     t.text     "stream_url"
@@ -40,6 +32,14 @@ ActiveRecord::Schema.define(:version => 20110728205710) do
     t.string   "oauth_token_secret"
     t.string   "oauth_token_verifier"
     t.text     "oauth_authorize_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tweets", :force => true do |t|
+    t.string   "to"
+    t.string   "insult"
+    t.string   "t"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

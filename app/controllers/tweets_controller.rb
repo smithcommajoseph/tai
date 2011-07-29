@@ -12,7 +12,7 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.create(params[:tweet])
     if @tweet.valid?
-      twitter_account = TwitterAccount.find_by_oauth_token(@tweet.t)
+      twitter_account = Account.find_by_oauth_token(@tweet.t)
       twitter_account.post("#{@tweet.to} is a #{@tweet.insult} #tweetaninsult")
       flash[:notice] = "Sweet! You successfully (and publicly) bashed that no good #{@tweet.to} proper!"
       redirect_to :action => 'show', :id => @tweet.id
