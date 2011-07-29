@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
     redirect_to(twitter_account.authorize_url(twitter_callback_url))
   end
   
-  def callback
+  def twitter_callback
     if params[:denied] && !params[:denied].empty?
       # redirect_to(deals_url, :alert => 'Unable to connect with twitter: #{parms[:denied]}')
     else
