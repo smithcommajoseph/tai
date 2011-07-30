@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class TwitterAccountsHelperTest < ActionView::TestCase
+class AccountsHelperTest < ActionView::TestCase
 end

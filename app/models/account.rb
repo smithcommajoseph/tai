@@ -4,7 +4,10 @@ class Account < ActiveRecord::Base
   CONSUMER_SECRET = APP_CONFIG[:twitter][:consumer_secret]
   OPTIONS = {:site => "http://api.twitter.com", :request_endpoint => "https://api.twitter.com/oauth/request_token"}
   
-  def authorize_url(callback_url = '')
+  FACEBOOK_CLIENT_ID = APP_CONFIG[:facebook][:consumer_key]
+  FACEBOOK_CLIENT_SECRET = APP_CONFIG[:facebook][:consumer_key]
+  
+  def twitter_authorize_url(callback_url = '')
     if self.oauth_authorize_url.blank?
       # Step one, generate a request URL with a request token and secret
       signing_consumer = OAuth::Consumer.new(Account::CONSUMER_KEY, Account::CONSUMER_SECRET, Account::OPTIONS)
@@ -17,7 +20,7 @@ class Account < ActiveRecord::Base
     self.oauth_authorize_url
   end
   
-  def validate_oauth_token(oauth_verifier, callback_url = '')
+  def twitter_validate_oauth_token(oauth_verifier, callback_url = '')
     begin
       signing_consumer = OAuth::Consumer.new(Account::CONSUMER_KEY, Account::CONSUMER_SECRET, Account::OPTIONS)
       access_token = OAuth::RequestToken.new(signing_consumer, self.oauth_token, self.oauth_token_secret).
@@ -33,7 +36,7 @@ class Account < ActiveRecord::Base
     self.save!
   end
   
-  def post(message)
+  def twitter_post(message)
     Twitter.configure do |config|
       config.consumer_key = Account::CONSUMER_KEY
       config.consumer_secret = Account::CONSUMER_SECRET
@@ -48,6 +51,38 @@ class Account < ActiveRecord::Base
       self.errors.add(:oauth_token, "Unable to send to twitter: #{e.to_s}")
       return false
     end
+  end
+  
+  def fb_authorize_url(callback_url = '')
+    if self.oauth_authorize_url.blank?
+      self.oauth_authorize_url = "https://graph.facebook.com/oauth/authorize?client_id=#{FACEBOOK_CLIENT_ID}&redirect_uri=#{callback_url}&scope=offline_access,publish_stream"
+      self.save!
+    end
+    self.oauth_authorize_url
+  end
+  
+  def fb_validate_oauth_token(oauth_verifier, callback_url = '')
+    response = RestClient.get 'https://graph.facebook.com/oauth/access_token', :params => {
+                   :client_id => FACEBOOK_CLIENT_ID,
+                   :redirect_uri => callback_url.html_safe,
+                   :client_secret => FACEBOOK_CLIENT_SECRET,
+                   :code => oauth_verifier.html_safe
+                }
+    pair = response.body.split("&")[0].split("=")
+    if (pair[0] == "access_token")
+      self.access_token = pair[1]
+      response = RestClient.get 'https://graph.facebook.com/me', :params => { :access_token => self.access_token }
+      self.stream_url = JSON.parse(response.body)["link"]
+      self.active = true
+    else 
+      self.errors.add(:oauth_verifier, "Invalid token, unable to connect to facebook: #{pair[1]}")
+      self.active = false
+    end
+    self.save!
+  end
+  
+  def fb_post(message)
+    RestClient.post 'https://graph.facebook.com/me/feed', { :access_token => self.access_token, :message => message }
   end
   
 end
