@@ -1,0 +1,7 @@
+<p id="notice"><%= flash[:notice] %></p>
+
+<section id="network-choices">
+    <p>Pick your poison. Do you want to post to Twitter or Facebook?</p>
+    <%= link_to 'Twitter', new_account_path(:network => 'twitter'), :id => "twitter-link" %>
+    <%= link_to 'Facebook', new_account_path(:network => 'fb'), :id => "fb-link" %>
+</section>
