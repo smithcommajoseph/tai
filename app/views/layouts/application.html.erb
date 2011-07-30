@@ -9,13 +9,17 @@
 </head>
 <body>
 	<header>
-		<h1>T.weet A.n I.nsult</h1>
+		<section class="container_16">
+			<h1 class="grid_16">T.weet A.n I.nsult</h1>
+		</section>
 	</header>
 	
 	<div id="wrap" class="container_16">
 		<div class="grid_16">
 			<section id="do-it">
-				<%= yield %>
+				<section id="d-cell">
+					<%= yield %>
+				</section>
 			</section>
 			
 			<% 50.times do %>
@@ -37,17 +41,14 @@
 			<section class="breaker">&#8230;</section>
 			<article>
 			    <h2>Whose responsible for this?</h2>
-			    <p>My name's Joseph Smith, i'm not Mormon and you can <a href="#do-it">Tweet an Insult</a> my way <a href="http://twitter.com/#!/technicolorenvy">@technicolorenvy</a></p>
-			</article>
-			<section class="breaker">&#8230;</section>
-			<article>
-			    <h2>Alright! I'm totally in. Now What?</h2>
-			    <p>Glad you asked. Scroll to the top or click <a href="#do-it">HERE</a> Let's do this!</p>
+			    <p>My name's Joseph Smith, i'm not Mormon and you can <%= link_to 'Tweet an Insult', root_path %> my way <%= link_to '@technicolorenvy', "http://twitter.com/#!/technicolorenvy" %></p>
 			</article>
 		</div>
 	</div>
 	<footer>
-			<a href="#infos">?</a>
+		<section class="container_16">
+			<a href="#infos"></a>
+		</section>
 	</footer>
 </body>
 </html>

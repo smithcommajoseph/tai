@@ -1,5 +1,3 @@
-
-
 /**
  * HTML5 ✰ Boilerplate
  *
@@ -274,13 +272,13 @@ header{
 	z-index: 9999;
 	}
 header h1{ 
-	font: 4em 'Love Ya Like A Sister', cursive;
+	font: 4em/2em 'Love Ya Like A Sister', cursive;
 	color:#C93C00; 
 	text-shadow: #7b625a 1px 2px 0;
 	}
 	
 	
-.container_16{ 
+#wrap{ 
 	position:relative;
 	padding-bottom:200px;
 	}
@@ -290,10 +288,15 @@ header h1{
 	text-shadow: #b5b5b5 1px 1px 0px;
 	}
 #do-it{ 
-	display:inline-block;
+	display:table;
 	width:100%;
-	height:200px;
-	margin: 40px 0 40px 0;
+	min-height:200px;
+	text-align:center; 
+	margin-top: 80px; 
+	}
+#do-it #d-cell { 
+	display:table-cell;
+	vertical-align:middle;
 	}
 #launcher{ 
 	display:block;
@@ -312,8 +315,61 @@ p{
 	font: 4em 'Love Ya Like A Sister', cursive;
 	padding-bottom:25px; 
 	text-shadow: #b5b5b5 1px 2px 0;
-	}	 
+	}
+		 
+#to{ 
+	font-size: 3em; 
+	text-shadow: #000000 1px 2px 0;
+	}	
+#the-at{ 
+	display:inline-block;
+	color:#33ccff; 
+	text-shadow: #2cbce7 1px 1px 0; 
+	position: relative; 
+	top: 9px; 
+	font-size: 1.2em;
+	}
+#to input{ 
+	text-align:center;
+	border: 2px solid #ccc;
+	width:400px
+	}
+#isa{ 
+	font-size: 2em; 
+	color:#aaa; 
+	line-height: 3em;
+	}
 	
+#insult input{ 
+	text-align:center;
+	font-size: 3em; 
+	border:0px;
+	}
+	
+#new_tweet input#tweet_submit{ 
+	display: inline-block;
+	background-color:#E88801;
+	border:1px solid;
+	border-radius:8px; 
+	line-height: 1.5em; 
+	padding-right: 14px; 
+	padding-left: 14px; 
+	color: #5b330c; 
+	text-shadow: #e7a359 1px 1px 0; 
+	font-size: 1.5em; 
+	margin-top: 30px;
+	-webkit-transition: all 0.5s
+	}
+#new_tweet input#tweet_submit:hover{ 
+	background-color: #97185f;
+	color:#fff;
+	text-shadow: #730046 1px 1px 0;
+	border-color:#730046; 
+	}	
+
+#infos{ 
+	margin-top:150px;
+	}
 footer{ 
 	background-color: transparent;
 	position: fixed;
@@ -325,14 +381,28 @@ footer{
 	}
 footer a{
 	display:inline-block;
+	width: 50px; 
+	height: 50px; 
 	font: bold 3em/1.1em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	text-decoration:none;
-	background-color: #BFBB11;
 	color:#111; 
 	text-shadow: #cfc980 1px 2px 0;
 	border-radius: 30px; 
-	padding-right: 10px; 
-	padding-left: 10px; 
 	position: relative; 
-	top: 27px;
+	top: 27px; 
+	-webkit-transition: background 0.5s;
+			background: #BFBB11 url(../images/bg-help-home.png) no-repeat 5px 7px;
+
+
+	}
+	
+footer a:hover{ 
+	background: #2690CA url(../images/bg-help-home.png) no-repeat 5px -59px;
+	}
+	
+footer a.gohome{ 
+		background: #2690CA url(../images/bg-help-home.png) no-repeat -55px 7px;
+	}
+footer a.gohome:hover{ 
+		background: #BFBB11 url(../images/bg-help-home.png) no-repeat -55px -59px;
 	}

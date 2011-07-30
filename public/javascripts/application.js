@@ -9,6 +9,7 @@ var Tai = Tai || {};
 			$wn,
 			$wrap,
 			$doIt,
+			$infos,
 			$launcherScrolls,
 			$infoScrolls,
 			$launcher;
@@ -17,38 +18,56 @@ var Tai = Tai || {};
 			$wn = $(window);
 			$wrap = $('#wrap');
 			$doIt = $('#do-it');
+			$infos = $('#infos');
 			$launcherScrolls = $('a[href=#do-it]');
 			$infoScrolls = $('a[href=#infos]');
 			$launcher = $('#launcher');
 						
-			_positionTop();
-			
+			_sizeDoIt();
+			_footerLinkInfoOrHome();
 			_binds();
 		};
 		
 		function _binds(){
-			$wn.bind('resize.tai', function(e){
-				_positionTop();
+			$wn.bind({
+				resize: function(e){
+					_sizeDoIt();
+				},
+				scroll: function(e){
+					_footerLinkInfoOrHome();
+				}
 			});
 			
-			$launcherScrolls.bind('click.tai', function(e){
+			$launcherScrolls.live('click', function(e){
 				e.preventDefault();
 				$.scrollTo(0, 800);
 			});
 			
-			$infoScrolls.bind('click.tai', function(e){
+			$infoScrolls.live('click', function(e){
 				e.preventDefault();
 				$.scrollTo($('#infos').position().top, 800);
 			});
-			
+						
 		}
 		
-		function _positionTop(){
-			var top = ((($wn.height() + $doIt.outerHeight() ) / 4) - 50) + 'px';
-			
-			$wrap.css({'top': top});
-			$doIt.css({'margin-bottom': top});
+		function _sizeDoIt(){
+			var top = ($wn.height() - ($('footer').height() + $('header').height())) + 'px';
+			$doIt.css({height: top});
 		}
+		
+		function _footerLinkInfoOrHome(){
+			var homeL = "#do-it",
+				infoL = "#infos",
+				curScroll = $wn[0].scrollY,
+				$target = $('footer a');
+			
+			if(curScroll >= $doIt.position().top + $doIt.height() ){
+				$target.addClass('gohome').attr('href', homeL);
+			} else {
+				$target.removeClass('gohome').attr('href', infoL);
+			}
+		}
+		
 		
 		return pub;
 	})();
