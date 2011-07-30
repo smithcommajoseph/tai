@@ -20,4 +20,7 @@ class AccountsController < ApplicationController
     end
   end
   
+  def fb_callback
+    
+  end
 end
