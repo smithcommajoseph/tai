@@ -270,13 +270,16 @@ header{
 	height: 100px; 
 	background-image: url(../images/bg_header.png); 
 	z-index: 9999;
+		font: 1em 'Love Ya Like A Sister', cursive;
+
 	}
-header h1{ 
-	font: 4em/2em 'Love Ya Like A Sister', cursive;
-	color:#C93C00; 
-	text-shadow: #7b625a 1px 2px 0;
+header h1,
+header h1 a{ 
+	color:#C93C00 !important; 
+	text-shadow: #7b625a 1px 2px 0; 
+	line-height: 2em;
+	text-decoration:none !important;
 	}
-	
 	
 #wrap{ 
 	position:relative;
@@ -330,7 +333,7 @@ p{
 	font-size: 1.2em;
 	}
 #to input{ 
-	text-align:center;
+	text-align: left;
 	border: 2px solid #ccc;
 	width:400px
 	}
