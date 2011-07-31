@@ -3,6 +3,7 @@ Tai::Application.routes.draw do
   resource :account, :only => [:new] 
   match '/callback/twitter/' => "accounts#twitter_callback", :as => :twitter_callback
   match '/callback/facebook/' => "accounts#fb_callback", :as => :facebook_callback
+  match '/interstitial' => "accounts#interstitial", :as => :account_interstitial
   
   resources :messages, :only => [:new, :create, :show] 
   

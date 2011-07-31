@@ -6,6 +6,8 @@ class MessagesController < ApplicationController
     insult = "#{adjective} #{noun}"
     t = flash[:t]
     n = flash[:n]
+    flash[:t] = t
+    flash[:n] = n
     @message = Message.new({:t => t, :n => n, :insult => insult})
   end
   
