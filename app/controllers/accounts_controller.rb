@@ -33,7 +33,7 @@ class AccountsController < ApplicationController
       # This is the callback, we have an id and an access code
       facebook_account = Account.find(params[:id])
       facebook_account.fb_validate_oauth_token(params[:code], facebook_callback_url(:id => facebook_account.id))
-      redirect_to(:root, :notice => 'Facebook account activated!')
+      redirect_to(new_tweet_url, :notice => 'Facebook account activated!', :flash => {:t => facebook_account.oauth_token})
     end
   end
 end
