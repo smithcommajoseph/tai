@@ -62,13 +62,7 @@ class Account < ActiveRecord::Base
   end
   
   def fb_validate_oauth_token(oauth_verifier, callback_url = '')
-    response = RestClient.get 'https://graph.facebook.com/oauth/access_token', :params => {
-                   :type => 'client_cred',
-                   :client_id => FACEBOOK_CLIENT_ID,
-                   :redirect_uri => callback_url.html_safe,
-                   :client_secret => FACEBOOK_CLIENT_SECRET,
-                   :code => oauth_verifier.html_safe,
-                }
+    response = RestClient.get "https://graph.facebook.com/oauth/access_token?type=client_cred&client_id=#{FACEBOOK_CLIENT_ID}&redirect_uri=#{callback_url.html_safe}&client_secret=#{FACEBOOK_CLIENT_SECRET}&code=#{oauth_verifier.html_safe}"
     # callback_url = "http://tweetaninsult.com/callback/facebook"
     # oauth_verifier="AQDvBBy5RkE-IAjv4ykx_7gFYAd9cqV6S4J2lFmKKRtZ1JGu4VgPtWOvxU4JgabMN6QqPqcz5gxZCv2Y4sPAbAI-wW1_2uuIyXMU5BUOceDe29oLFbS0wpJuE8fGNMPnQkG94VaFoXKMu08uZ7rRNtiKN8na-5H0FmCmKtUfMU0r57EKU0ytL8XK8sEJ3JSCrpQ"
     # response = RestClient.get 'https://graph.facebook.com/oauth/access_token', :params => {
@@ -78,7 +72,7 @@ class Account < ActiveRecord::Base
     #                :code => oauth_verifier.html_safe
     #             }        
 
-# https://graph.facebook.com/oauth/access_token?type=client_cred&client_id=190960770964408&redirect_uri=http://tweetaninsult.com/callback/facebook/&code=AQDj-DftXFKyfJo3Q9XvCru6X9TBXU5_64Zl1sIdEwRLxdE9lHQvOFumynDeBtKQdQpmp-2cYsVgdxho-pshoBWmSsN68PUnphQEPhOBm4d6TKMIQrg2MydE4Fmg4Ka3UfpvaTdpUQuwYZiGYEKt8ZBHSyzDkFjIy1iYLiT-GtufWrjXwAWRSmrzAt9M7suUtCc&client_secret=667b79e3e9ea2f376cd8731dad8d4ff4
+# https://graph.facebook.com/oauth/access_token?type=client_cred&client_id=190960770964408&redirect_uri=http://tweetaninsult.com/callback/facebook/&code=AQAJKcRUOATAPX4qC-3PjY2h8f9rpNh0-8Lw7wsiErgfA5z56dO6vFP-JHKwnqwt9skDNSW_PuFpf-YxYny5hPWypMcNpMEkigNH6mZrB48_eFWlSwKquAyY6yFrCgWBsrLQBMK0mrwAbRjfYWMCWm244zAGf0qotY7h6eglORB7ouU37ahbQePBBJSFgT9ffNU&client_secret=667b79e3e9ea2f376cd8731dad8d4ff4
 
     pair = response.body.split("&")[0].split("=")
     if (pair[0] == "access_token")
