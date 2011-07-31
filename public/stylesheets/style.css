@@ -361,7 +361,8 @@ p{
 	text-shadow: #e7a359 1px 1px 0; 
 	font-size: 1.5em; 
 	margin-top: 30px;
-	-webkit-transition: all 0.5s
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s
 	}
 #new_tweet input#tweet_submit:hover{ 
 	background-color: #97185f;
@@ -374,7 +375,6 @@ p{
 	margin-bottom:20px;
 	}
 #network-choices a{ 
-	border-radius: 4px;
 	color: white;
 	display: inline-block;
 	font: normal normal bold 18px/22px 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -382,7 +382,13 @@ p{
 	padding: 8px 0px 10px;
 	text-decoration: none;
 	width: 200px;
-	-webkit-transition: background-color 0.5s
+	-webkit-transition: background-color 0.5s;
+	-moz-transition: background-color 0.5s;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-o-radius: 4px;
+	border-radius: 4px;
+
 	}
 #network-choices a#twitter-link{ 
 	background: #68bcfc;
@@ -418,11 +424,15 @@ footer a{
 	text-decoration:none;
 	color:#111; 
 	text-shadow: #cfc980 1px 2px 0;
-	border-radius: 30px; 
 	position: relative; 
 	top: 27px; 
+	-webkit-border-radius: 30px; 
+	-moz-border-radius: 30px; 
+	-o-border-radius: 30px; 
+	border-radius: 30px;
 	-webkit-transition: background 0.5s;
-			background: #BFBB11 url(../images/bg-help-home.png) no-repeat 5px 7px;
+	-moz-transition: background 0.5s;
+	background: #BFBB11 url(../images/bg-help-home.png) no-repeat 5px 7px;
 	}
 	
 footer a:hover{ 
@@ -430,9 +440,9 @@ footer a:hover{
 	}
 	
 footer a.gohome{ 
-		background: #2690CA url(../images/bg-help-home.png) no-repeat -55px 7px;
+		background: #2690CA url(../images/bg-help-home.png) no-repeat -56px 7px;
 	}
 footer a.gohome:hover{ 
-		background: #BFBB11 url(../images/bg-help-home.png) no-repeat -55px -59px;
+		background: #BFBB11 url(../images/bg-help-home.png) no-repeat -56px -59px;
 	}
 	

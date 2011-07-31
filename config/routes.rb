@@ -6,7 +6,7 @@ Tai::Application.routes.draw do
   
   resources :messages, :only => [:new, :create, :show] 
   
-  match '/main/make_a_choice' => "main#choose", :as => :network_choice
+  match '/make_a_choice' => "main#choose", :as => :network_choice
   
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
