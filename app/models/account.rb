@@ -62,6 +62,8 @@ class Account < ActiveRecord::Base
   end
   
   def fb_validate_oauth_token(oauth_verifier, callback_url = '')
+    require 'rest_client'
+    
     response = RestClient.get 'https://graph.facebook.com/oauth/access_token', :params => {
                    :client_id => FACEBOOK_CLIENT_ID,
                    :redirect_uri => callback_url.html_safe,
