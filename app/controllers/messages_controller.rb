@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
     @message = Message.create(params[:message])
     if @message.valid?
       account = Account.find_by_oauth_token(@message.t)
-      if @message.n === "facebook"
+      if @message.n === "fb"
         account.fb_post("#{@message.to} is a #{@message.insult} #tweetaninsult")
       else
         account.twitter_post("#{@message.to} is a #{@message.insult} #tweetaninsult")
