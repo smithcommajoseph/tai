@@ -62,7 +62,13 @@ class Account < ActiveRecord::Base
   end
   
   def fb_validate_oauth_token(oauth_verifier, callback_url = '')
-    response = RestClient.get "https://graph.facebook.com/oauth/access_token?type=client_cred&client_id=#{FACEBOOK_CLIENT_ID}&redirect_uri=#{callback_url.html_safe}&client_secret=#{FACEBOOK_CLIENT_SECRET}&code=#{oauth_verifier.html_safe}"
+    response = RestClient.get 'https://graph.facebook.com/oauth/access_token', :params => {
+                   :type => 'client_cred',
+                   :client_id => FACEBOOK_CLIENT_ID,
+                   :redirect_uri => callback_url,
+                   :client_secret => FACEBOOK_CLIENT_SECRET,
+                   :code => oauth_verifier,
+                }
     # callback_url = "http://tweetaninsult.com/callback/facebook"
     # oauth_verifier="AQDvBBy5RkE-IAjv4ykx_7gFYAd9cqV6S4J2lFmKKRtZ1JGu4VgPtWOvxU4JgabMN6QqPqcz5gxZCv2Y4sPAbAI-wW1_2uuIyXMU5BUOceDe29oLFbS0wpJuE8fGNMPnQkG94VaFoXKMu08uZ7rRNtiKN8na-5H0FmCmKtUfMU0r57EKU0ytL8XK8sEJ3JSCrpQ"
     # response = RestClient.get 'https://graph.facebook.com/oauth/access_token', :params => {
