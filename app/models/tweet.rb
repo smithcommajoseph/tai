@@ -1,4 +1,4 @@
-class Tweet < ActiveRecord::Base
+class Message < ActiveRecord::Base
   
   validates :t, :presence => true
   validates :to, :presence => true

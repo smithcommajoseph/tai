@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
-<%= form_for @tweet do |f| %>
+<%= form_for @message do |f| %>
     <%= f.hidden_field :t %>
+    <%= f.hidden_field :n %>
     <p id="to"><span id="the-at">@</span> <%= f.text_field :to %></p>
     <p id="isa">is a</p>
     <p id="insult"><%= f.text_field :insult %></p>

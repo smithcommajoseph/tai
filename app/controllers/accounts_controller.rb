@@ -18,7 +18,7 @@ class AccountsController < ApplicationController
       twitter_account.twitter_validate_oauth_token(params[:oauth_verifier], twitter_callback_url)
       twitter_account.save
       if twitter_account.active?
-        redirect_to(new_tweet_url, :notice => 'Twitter account activated!', :flash => {:t => twitter_account.oauth_token})
+        redirect_to(new_message_url, :notice => 'Twitter account activated!', :flash => {:t => twitter_account.oauth_token, :n => 'twitter'})
       else
         flash[:notice] = "Unable to activate twitter account."
       end
@@ -33,7 +33,7 @@ class AccountsController < ApplicationController
       # This is the callback, we have an id and an access code
       facebook_account = Account.find(params[:id])
       facebook_account.fb_validate_oauth_token(params[:code], facebook_callback_url(:id => facebook_account.id))
-      redirect_to(new_tweet_url, :notice => 'Facebook account activated!', :flash => {:t => facebook_account.oauth_token})
+      redirect_to(new_message_url, :notice => 'Facebook account activated!', :flash => {:t => facebook_account.oauth_token, :n => 'fb'})
     end
   end
 end
