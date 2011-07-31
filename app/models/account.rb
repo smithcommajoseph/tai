@@ -63,7 +63,7 @@ class Account < ActiveRecord::Base
   
   def fb_validate_oauth_token(oauth_verifier, callback_url = '')
    response = RestClient.get 'https://graph.facebook.com/oauth/access_token', :params => {
-                  :type => 'client_cred',
+                  :type => 'user_agent',
                   :client_id => FACEBOOK_CLIENT_ID,
                   :redirect_uri => callback_url.html_safe,
                   :client_secret => FACEBOOK_CLIENT_SECRET,
@@ -74,6 +74,7 @@ class Account < ActiveRecord::Base
     if (pair[0] == "access_token")
       self.oauth_token = pair[1]
       logger.info "self.oauth_token is :"+self.oauth_token
+      
       response = RestClient.get 'https://graph.facebook.com/me', :params => { :access_token => self.oauth_token }
       self.stream_url = JSON.parse(response.body)["link"]
       self.active = true
