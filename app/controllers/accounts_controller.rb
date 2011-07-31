@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
     account = Account.create()
     
     if(params[:network] === 'fb')
-      redirect_to(account.fb_authorize_url(facebook_callback_url))      
+      redirect_to(account.fb_authorize_url(facebook_callback_url(:id => account.id)))      
     else
       redirect_to(account.twitter_authorize_url(twitter_callback_url))
     end
