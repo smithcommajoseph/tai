@@ -349,7 +349,7 @@ p{
 	border:0px;
 	}
 	
-#new_tweet input#tweet_submit{ 
+#new_message input#message_submit{ 
 	display: inline-block;
 	background-color:#E88801;
 	border:1px solid;
@@ -364,7 +364,7 @@ p{
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s
 	}
-#new_tweet input#tweet_submit:hover{ 
+#new_message input#message_submit:hover{ 
 	background-color: #97185f;
 	color:#fff;
 	text-shadow: #730046 1px 1px 0;
