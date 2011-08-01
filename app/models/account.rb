@@ -9,12 +9,20 @@ class Account < ActiveRecord::Base
   
   def twitter_authorize_url(callback_url = '')
     if self.oauth_authorize_url.blank?
+      alph = [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;  
+      string = (0..50).map{ alph[rand(alph.length)]  }.join;
+      oauth_nonce = string
+      time = Time.now
+      oauth_timestamp = time.to_formatted_s(:number)
+      
       # Step one, generate a request URL with a request token and secret
       signing_consumer = OAuth::Consumer.new(Account::CONSUMER_KEY, Account::CONSUMER_SECRET, Account::OPTIONS)
+
       request_token = signing_consumer.get_request_token(:oauth_callback => callback_url)
       self.oauth_token = request_token.token
       self.oauth_token_secret = request_token.secret
-      self.oauth_authorize_url = request_token.authorize_url
+      sig = CGI.escape(sign(CONSUMER_KEY, request_token.secret))
+      self.oauth_authorize_url = "http://twitter.com/oauth/authenticate?oauth_token=#{request_token.token}&oauth_nonce=#{oauth_nonce}&outh_timestamp=#{oauth_timestamp}&consumer_key=#{CONSUMER_KEY}&oauth_signature_method=HMAC-SHA1&oauth_version=1.0&oauth_signature=#{sig}"
       self.save!
     end
     self.oauth_authorize_url
@@ -53,6 +61,12 @@ class Account < ActiveRecord::Base
     end
   end
   
+  def sign(key, base_string)
+    digest = OpenSSL::Digest::Digest.new( 'sha1' )
+    hmac = OpenSSL::HMAC.digest( digest, key, base_string  )
+    Base64.encode64( hmac ).chomp.gsub( /\n/, '' )
+  end
+  
   def fb_authorize_url(callback_url = '')
     if self.oauth_authorize_url.blank?
       self.oauth_authorize_url = "https://graph.facebook.com/oauth/authorize?client_id=#{FACEBOOK_CLIENT_ID}&redirect_uri=#{callback_url}&scope=offline_access,publish_stream"
@@ -73,8 +87,6 @@ class Account < ActiveRecord::Base
     pair = response.body.split("&")[0].split("=")
     if (pair[0] == "access_token")
       self.oauth_token = pair[1]
-      logger.info "self.oauth_token is :"+self.oauth_token
-      
       response = RestClient.get 'https://graph.facebook.com/me', :params => { :access_token => self.oauth_token }
       self.stream_url = JSON.parse(response.body)["link"]
       self.active = true
