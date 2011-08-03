@@ -1,6 +1,5 @@
 var Tai = Tai || {};
 
-
 (function($){
 	var self = this;
 	
@@ -54,16 +53,19 @@ var Tai = Tai || {};
 			});
 			
 			$networkChoices.bind('click', function(e){
-				var loc,
-					target = '_blank',
-					attr = 'height=400,width=800,left=250,top=100,resizable=yes';
-				
 				e.preventDefault();
 				
-				if($(e.currentTarget).attr('id') === 'fb-link') { loc = root+'/account/new?network=fb'; } 
-				else { loc = root+'/account/new?network=twitter'; }
-				
-				popup = window.open(loc, target, attr, true);
+				if(typeof popup == "undefined" || popup.closed !== false){
+					var loc,
+						target = '_blank',
+						attr = 'height=400,width=800,left=250,top=100,resizable=yes';
+
+
+					if($(e.currentTarget).attr('id') === 'fb-link') { loc = root+'/account/new?network=fb'; } 
+					else { loc = root+'/account/new?network=twitter'; }
+
+					popup = window.open(loc, target, attr, true);
+				}
 				
 			});
 						

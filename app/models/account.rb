@@ -2,7 +2,7 @@ class Account < ActiveRecord::Base
   
   CONSUMER_KEY = APP_CONFIG[:twitter][:consumer_key]
   CONSUMER_SECRET = APP_CONFIG[:twitter][:consumer_secret]
-  OPTIONS = {:site => "http://api.twitter.com", :request_endpoint => "https://api.twitter.com/oauth/request_token"}
+  OPTIONS = {:site => "https://api.twitter.com", :request_endpoint => "https://api.twitter.com/oauth/request_token"}
   
   FACEBOOK_CLIENT_ID = APP_CONFIG[:facebook][:consumer_key]
   FACEBOOK_CLIENT_SECRET = APP_CONFIG[:facebook][:consumer_secret]
@@ -10,19 +10,30 @@ class Account < ActiveRecord::Base
   def twitter_authorize_url(callback_url = '')
     if self.oauth_authorize_url.blank?
       alph = [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;  
-      string = (0..50).map{ alph[rand(alph.length)]  }.join;
+      string = (0..25).map{ alph[rand(alph.length)]  }.join;
       oauth_nonce = string
       time = Time.now
       oauth_timestamp = time.to_formatted_s(:number)
       
       # Step one, generate a request URL with a request token and secret
       signing_consumer = OAuth::Consumer.new(Account::CONSUMER_KEY, Account::CONSUMER_SECRET, Account::OPTIONS)
-
+      # logger.info(signing_consumer.signature)
       request_token = signing_consumer.get_request_token(:oauth_callback => callback_url)
       self.oauth_token = request_token.token
       self.oauth_token_secret = request_token.secret
-      sig = CGI.escape(sign(CONSUMER_KEY, request_token.secret))
-      self.oauth_authorize_url = "http://twitter.com/oauth/authenticate?oauth_token=#{request_token.token}&oauth_nonce=#{oauth_nonce}&outh_timestamp=#{oauth_timestamp}&consumer_key=#{CONSUMER_KEY}&oauth_signature_method=HMAC-SHA1&oauth_version=1.0&oauth_signature=#{sig}"
+      
+      params = [
+        ['oauth_consumer_key', CONSUMER_KEY],
+        ['oauth_nonce', oauth_nonce],
+        ['oauth_signature_method', 'HMAC-SHA1'],
+        ['oauth_timestamp', oauth_timestamp],
+        ['oauth_token', request_token.token],
+        ['oauth_version', '1.0'],
+      ]
+      sign_key = "#{CGI.escape(CONSUMER_SECRET)}&#{CGI.escape(request_token.secret)}"
+      base_string = create_base_string(params)
+      sig = CGI.escape(sign(sign_key, base_string))
+      self.oauth_authorize_url = create_auth_url(params, sig)
       self.save!
     end
     self.oauth_authorize_url
@@ -59,6 +70,24 @@ class Account < ActiveRecord::Base
       self.errors.add(:oauth_token, "Unable to send to twitter: #{e.to_s}")
       return false
     end
+  end
+  
+  def create_base_string(params)
+    a=[]
+    params.each do |v|
+      a.push("#{CGI.escape(v[0])}%3D#{CGI.escape(v[1])}");
+    end
+
+    CGI.escape("GET&#{CGI.escape('https://api.twitter.com/oauth/authorize')}&#{a.join("%26")}")
+  end
+  
+  def create_auth_url(params, sig)
+    a=[]
+    params.each do |v|
+      a.push("#{v[0]}=#{v[1]}");
+    end
+    
+    "https://api.twitter.com/oauth/authorize?#{a.join('&')}&oauth_signature=#{sig}"
   end
   
   def sign(key, base_string)
