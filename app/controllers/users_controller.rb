@@ -16,5 +16,4 @@ class UsersController < ApplicationController
 	    flash[:u] = params[:u]
   	end
 
-
 end
