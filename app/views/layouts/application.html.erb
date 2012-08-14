@@ -3,8 +3,8 @@
 <head>
   <title>T.weet A.n I.nsult</title>
   <link href='http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister&v2' rel='stylesheet' type='text/css'>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :all %>
+  <%= stylesheet_link_tag :application %>
+  <%= javascript_include_tag "init/index" %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -50,5 +50,9 @@
 			<a href="#infos"></a>
 		</section>
 	</footer>
+
+	<!-- footer JS -->
+	<%= javascript_include_tag "kernel/index" %>
+
 </body>
 </html>

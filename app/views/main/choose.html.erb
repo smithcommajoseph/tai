@@ -2,6 +2,6 @@
 
 <section id="network-choices">
     <p>Pick your poison. Do you want to post to Twitter or Facebook?</p>
-    <%= link_to 'Twitter', new_account_path(:network => 'twitter'), :id => "twitter-link" %>
-    <%= link_to 'Facebook', new_account_path(:network => 'fb'), :id => "fb-link" %>
+    <%= link_to 'Twitter', 'auth/twitter', :id => "twitter-link" %>
+    <%= link_to 'Facebook', 'auth/facebook', :id => "fb-link" %>
 </section>

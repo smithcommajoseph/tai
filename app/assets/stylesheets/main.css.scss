@@ -1,0 +1,197 @@
+header{ 
+  text-align:center;
+  position: fixed;
+  width:100%;
+  top:0px;
+  background-color: transparent; 
+  height: 100px; 
+  background-image: asset-url("bg_header.png", image); 
+  z-index: 9999;
+    font: 1em 'Love Ya Like A Sister', cursive;
+
+  }
+header h1,
+header h1 a{
+  color:#C93C00 !important;
+  text-shadow: #7b625a 1px 2px 0; 
+  line-height: 2em;
+  text-decoration:none !important;
+  }
+  
+#wrap{
+  position:relative;
+  padding-bottom:200px;
+  }
+.grid_16 h2{
+  font: 2em 'Love Ya Like A Sister', cursive;
+  margin-bottom:10px; 
+  text-shadow: #b5b5b5 1px 1px 0px;
+  }
+#do-it{
+  display:table;
+  width:100%;
+  min-height:200px;
+  text-align:center; 
+  margin-top: 80px; 
+  }
+#do-it #d-cell {
+  display:table-cell;
+  vertical-align:middle;
+  }
+#launcher{
+  display:block;
+  text-indent: -9999px;
+  width: 520px; 
+  height: 200px; 
+  background-image: asset-url("icon.jpg", image);
+  margin:0 auto;
+  }
+p{ 
+  margin-bottom:10px;
+  font-size:1.1em;
+  }
+.breaker{ 
+  text-align:center;
+  font: 4em 'Love Ya Like A Sister', cursive;
+  padding-bottom:25px; 
+  text-shadow: #b5b5b5 1px 2px 0;
+  }
+     
+#to{ 
+  font-size: 3em; 
+  text-shadow: #000000 1px 2px 0;
+  } 
+#the-at{ 
+  display:inline-block;
+  color:#33ccff; 
+  text-shadow: #2cbce7 1px 1px 0; 
+  position: relative; 
+  top: 9px; 
+  font-size: 1.2em;
+  }
+#to input{ 
+  text-align: left;
+  border: 2px solid #ccc;
+  width:400px
+  }
+#isa{ 
+  font-size: 2em; 
+  color:#aaa; 
+  line-height: 3em;
+  }
+  
+#insult input{ 
+  text-align:center;
+  font-size: 3em; 
+  border:0px;
+  }
+  
+#new_message input#message_submit{ 
+  display: inline-block;
+  background-color:#E88801;
+  border:1px solid;
+  border-radius:8px; 
+  line-height: 1.5em; 
+  padding-right: 14px; 
+  padding-left: 14px; 
+  color: #5b330c; 
+  text-shadow: #e7a359 1px 1px 0; 
+  font-size: 1.5em; 
+  margin-top: 30px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s
+  }
+#new_message input#message_submit:hover{ 
+  background-color: #97185f;
+  color:#fff;
+  text-shadow: #730046 1px 1px 0;
+  border-color:#730046; 
+  }
+    
+#network-choices p{ 
+  margin-bottom:20px;
+  }
+#network-choices a{ 
+  color: white;
+  display: inline-block;
+  font: normal normal bold 18px/22px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  height: 22px;
+  padding: 8px 0px 10px;
+  text-decoration: none;
+  width: 200px;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-radius: 4px;
+  border-radius: 4px;
+
+  }
+#network-choices a#twitter-link{ 
+  background: #68bcfc;
+  } 
+#network-choices a#twitter-link:hover{ 
+  background: #4FABFC;
+  }
+#network-choices a#fb-link{ 
+  background: #617bae;
+  }
+#network-choices a#fb-link:hover{ 
+  background: #39589A;
+  }
+  
+#infos{ 
+  margin-top:150px;
+  }
+  
+footer{ 
+  background-color: transparent;
+  position: fixed;
+  bottom:0px;
+  min-height:100px;
+  width:100%; 
+  background-image: asset-url("bg_footer.png", image);
+  text-align:center;
+  }
+footer a{
+  display:inline-block;
+  width: 50px; 
+  height: 50px; 
+  font: bold 3em/1.1em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  text-decoration:none;
+  color:#111; 
+  text-shadow: #cfc980 1px 2px 0;
+  position: relative; 
+  top: 27px; 
+  -webkit-border-radius: 30px; 
+  -moz-border-radius: 30px; 
+  -o-border-radius: 30px; 
+  border-radius: 30px;
+  -webkit-transition: background 0.5s;
+  -moz-transition: background 0.5s;
+  background: #BFBB11 asset-url("bg-help-home.png", image) no-repeat 5px 7px;
+  }
+  
+footer a:hover{ 
+  background: #2690CA asset-url("bg-help-home.png", image) no-repeat 5px -59px;
+  }
+  
+footer a.gohome{ 
+    background: #2690CA asset-url("bg-help-home.png", image)  no-repeat -56px 7px;
+  }
+footer a.gohome:hover{ 
+    background: #BFBB11 asset-url("bg-help-home.png", image)  no-repeat -56px -59px;
+  }
+  
+header{ 
+  text-align:center;
+  }
+header h1{ 
+  font: 4em 'Love Ya Like A Sister', cursive;
+  }
+.grid_16 h2{ 
+  font: 2em 'Love Ya Like A Sister', cursive;
+  }
+html p{ 
+  margin-bottom:10px;
+  } 
